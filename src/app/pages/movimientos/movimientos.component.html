@@ -25,7 +25,8 @@
               <h3 class="card-title">Administrador de Movimientos</h3>
 
               <div class="card-tools">
-                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#mdlMovimiento">Nuevo Movimiento</button>
+                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" title="Nuevo Movimiento" data-target="#mdlMovimiento">Nuevo Movimiento</button>
+
               </div>
           </div>
           <div class="card-body">
@@ -43,7 +44,7 @@
               </thead>
               <tbody>
                <tr *ngFor="let m of mov">
-                     <td>{{m.fechaMov}}</td>
+                     <td>displayFormat: 'M/D/YYYY' {{m.fechaMov}}</td>
                      <td>{{m.empleado.nombreEmp}} {{m.empleado.apellidoEmp}}</td>
                      <td>{{m.empleado.rol.nombreRol}}</td>
                      <td>{{m.tipoMovimiento.nombre}}</td>
@@ -67,17 +68,17 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="mdlMovimientoTitle">Movimiento Nuevo</h5>
+        <h5 class="modal-title" id="mdlMovimientoTitle">{{this.title}}</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <form>
+        <form [formGroup]="formMov" >
           <div class="form-row">
             <div class="form-group col-md-12">
               <label for="inputEmpleado4">Empleado</label>
-              <select id="inputState" class="form-control" formControlName="empl">
+              <select id="inputState" class="form-control" (ngModelChange)="changeEmp()" formControlName="empl">
                 <option selected>Selecciona..</option>
                 <option *ngFor="let e of emp" [value]="e.idEmpleado">
                   {{e.nombreEmp}} {{e.apellidoEmp}} -- {{e.rol.nombreRol}}
@@ -86,7 +87,7 @@
             </div>
             <div class="form-group col-md-12">
               <label for="inputEmpleado4">Movimiento</label>
-              <select id="inputState" class="form-control" formControlName="movi">
+              <select id="inputState" class="form-control" (ngModelChange)="changeTMov($event)" formControlName="movi">
                 <option selected>Selecciona..</option>
                 <option *ngFor="let tm of tmov" [value]="tm.idTMovimiento">
                   {{tm.nombre}}
@@ -97,7 +98,7 @@
           <div class="form-row">
             <div class="form-group col-md-6">
               <label for="inputEmpleado4">Cantidad</label>
-              <input type="text" class="form-control" id="cantidad" formControlName="cant">
+              <input type="text" class="form-control" id="cantidad" (ngModelChange)="changeCant($event)"  formControlName="cant">
             </div>
             <div class="form-group col-md-6">
               <label for="inputEmpleado4">Costo</label>
@@ -114,7 +115,7 @@
               <input type="text" class="form-control" readonly id="total" formControlName="tot">
             </div>
           </div>
-          <button type="submit" class="btn btn-primary">Guardar</button>
+          <button type="submit" class="btn btn-primary" (click)="saveMov()">Guardar</button>
         </form>
       </div>
     </div>
