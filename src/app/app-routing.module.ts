@@ -12,6 +12,10 @@ import {ForgotPasswordComponent} from '@modules/forgot-password/forgot-password.
 import {RecoverPasswordComponent} from '@modules/recover-password/recover-password.component';
 import {MainMenuComponent} from '@pages/main-menu/main-menu.component';
 import {SubMenuComponent} from '@pages/main-menu/sub-menu/sub-menu.component';
+import { EmpledadosComponent } from './pages/empledados/empledados.component';
+import { MovimientosComponent } from './pages/movimientos/movimientos.component';
+import { RolesComponent } from './pages/main-menu/roles/roles.component';
+import { TipoMovimientoComponent } from './pages/main-menu/tipo-movimiento/tipo-movimiento.component';
 
 const routes: Routes = [
     {
@@ -25,16 +29,20 @@ const routes: Routes = [
                 component: ProfileComponent
             },
             {
-                path: 'blank',
-                component: BlankComponent
+                path: 'empleados',
+                component: EmpledadosComponent
             },
             {
-                path: 'sub-menu-1',
-                component: SubMenuComponent
+                path: 'movimientos',
+                component: MovimientosComponent
             },
             {
-                path: 'sub-menu-2',
-                component: BlankComponent
+                path: 'roles',
+                component: RolesComponent
+            },
+            {
+                path: 'tipomovimiento',
+                component: TipoMovimientoComponent
             },
             {
                 path: '',

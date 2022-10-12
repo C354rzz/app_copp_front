@@ -19,6 +19,10 @@ import {ToastrModule} from 'ngx-toastr';
 import {MessagesComponent} from '@modules/main/header/messages/messages.component';
 import {NotificationsComponent} from '@modules/main/header/notifications/notifications.component';
 
+import { jqxGridModule } from "jqwidgets-ng/jqxgrid";
+import {DataTablesModule} from 'angular-datatables';
+
+
 import {registerLocaleData} from '@angular/common';
 import localeEn from '@angular/common/locales/en';
 import {UserComponent} from '@modules/main/header/user/user.component';
@@ -35,6 +39,10 @@ import {uiReducer} from './store/ui/reducer';
 import {ProfabricComponentsModule} from '@profabric/angular-components';
 import {defineCustomElements} from '@profabric/web-components/loader';
 import { SidebarSearchComponent } from './components/sidebar-search/sidebar-search.component';
+import { EmpledadosComponent } from './pages/empledados/empledados.component';
+import { MovimientosComponent } from './pages/movimientos/movimientos.component';
+import { RolesComponent } from './pages/main-menu/roles/roles.component';
+import { TipoMovimientoComponent } from './pages/main-menu/tipo-movimiento/tipo-movimiento.component';
 
 defineCustomElements();
 registerLocaleData(localeEn, 'en-EN');
@@ -61,7 +69,11 @@ registerLocaleData(localeEn, 'en-EN');
         SubMenuComponent,
         MenuItemComponent,
         ControlSidebarComponent,
-        SidebarSearchComponent
+        SidebarSearchComponent,
+        EmpledadosComponent,
+        MovimientosComponent,
+        RolesComponent,
+        TipoMovimientoComponent
     ],
     imports: [
         BrowserModule,
@@ -75,7 +87,9 @@ registerLocaleData(localeEn, 'en-EN');
             positionClass: 'toast-top-right',
             preventDuplicates: true
         }),
-        ProfabricComponentsModule
+        ProfabricComponentsModule,
+        jqxGridModule,
+        DataTablesModule,
     ],
     providers: [],
     bootstrap: [AppComponent]

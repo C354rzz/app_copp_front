@@ -1,0 +1,125 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+  <div class="container-fluid">
+      <div class="row mb-2">
+          <div class="col-sm-6">
+              <h1>Lista de Movimientos</h1>
+          </div>
+          <div class="col-sm-6">
+              <ol class="breadcrumb float-sm-right">
+                  <li class="breadcrumb-item"><a href="#">Inicio</a></li>
+                  <li class="breadcrumb-item active">Movimientos</li>
+              </ol>
+          </div>
+      </div>
+  </div>
+  <!-- /.container-fluid -->
+</section>
+
+<!-- Main content -->
+<section class="content">
+  <!-- Default box -->
+  <div class="container-fluid">
+      <div class="card">
+          <div class="card-header">
+              <h3 class="card-title">Administrador de Movimientos</h3>
+
+              <div class="card-tools">
+                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#mdlMovimiento">Nuevo Movimiento</button>
+              </div>
+          </div>
+          <div class="card-body">
+            <table class="table table-bordered table-hover" id="movimientos">
+              <thead>
+                <tr>
+                  <th>Fecha</th>
+                  <th>Empleado</th>
+                  <th>Puesto</th>
+                  <th>Movimiento</th>
+                  <th>Cantidad</th>
+                  <th>Costo</th>
+                  <th>Total</th>
+                </tr>
+              </thead>
+              <tbody>
+               <tr *ngFor="let m of mov">
+                     <td>{{m.fechaMov}}</td>
+                     <td>{{m.empleado.nombreEmp}} {{m.empleado.apellidoEmp}}</td>
+                     <td>{{m.empleado.rol.nombreRol}}</td>
+                     <td>{{m.tipoMovimiento.nombre}}</td>
+                     <td>{{m.cantidad}}</td>
+                     <td>{{m.tipoMovimiento.costo}}</td>
+                     <td>{{m.total}}</td>
+                 </tr>
+              </tbody>
+            </table>
+          </div>
+          <!-- /.card-body -->
+          <div class="card-footer"></div>
+          <!-- /.card-footer-->
+      </div>
+  </div>
+  <!-- /.card -->
+</section>
+<!-- /.content -->
+<!-- Modals -->
+<div class="modal fade" id="mdlMovimiento" tabindex="-1" role="dialog" aria-labelledby="mdlMovimientoTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="mdlMovimientoTitle">Movimiento Nuevo</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-row">
+            <div class="form-group col-md-12">
+              <label for="inputEmpleado4">Empleado</label>
+              <select id="inputState" class="form-control" formControlName="empl">
+                <option selected>Selecciona..</option>
+                <option *ngFor="let e of emp" [value]="e.idEmpleado">
+                  {{e.nombreEmp}} {{e.apellidoEmp}} -- {{e.rol.nombreRol}}
+                </option>
+              </select>
+            </div>
+            <div class="form-group col-md-12">
+              <label for="inputEmpleado4">Movimiento</label>
+              <select id="inputState" class="form-control" formControlName="movi">
+                <option selected>Selecciona..</option>
+                <option *ngFor="let tm of tmov" [value]="tm.idTMovimiento">
+                  {{tm.nombre}}
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="inputEmpleado4">Cantidad</label>
+              <input type="text" class="form-control" id="cantidad" formControlName="cant">
+            </div>
+            <div class="form-group col-md-6">
+              <label for="inputEmpleado4">Costo</label>
+              <input type="text" class="form-control" id="costo" formControlName="costo">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="inputEmpleado4">Bono</label>
+              <input type="text" class="form-control" readonly id="Bono" formControlName="bono">
+            </div>
+            <div class="form-group col-md-6">
+              <label for="inputEmpleado4">Total</label>
+              <input type="text" class="form-control" readonly id="total" formControlName="tot">
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary">Guardar</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /.modals -->
+
+

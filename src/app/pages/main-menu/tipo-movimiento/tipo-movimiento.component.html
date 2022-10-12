@@ -1,0 +1,61 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+  <div class="container-fluid">
+      <div class="row mb-2">
+          <div class="col-sm-6">
+              <h1>Tipos de Movimientos</h1>
+          </div>
+          <div class="col-sm-6">
+              <ol class="breadcrumb float-sm-right">
+                  <li class="breadcrumb-item"><a href="#">Inicio</a></li>
+                  <li class="breadcrumb-item active">Tipos Movimientos</li>
+              </ol>
+          </div>
+      </div>
+  </div>
+  <!-- /.container-fluid -->
+</section>
+
+<!-- Main content -->
+<section class="content">
+  <!-- Default box -->
+  <div class="container-fluid">
+      <div class="card">
+          <div class="card-header">
+              <h3 class="card-title">Administrador de Tipos de Movimientos</h3>
+
+              <div class="card-tools">
+                <button type="button" class="btn btn-primary btn-sm">Nuevo registro</button>
+              </div>
+          </div>
+          <div class="card-body">
+            <table class="table table-bordered table-hover" id="tmovimiento">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Nombre</th>
+                  <th>Costo</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+               <tr *ngFor="let group of data">
+                     <td>{{group.idTMovimiento}}</td>
+                     <td>{{group.nombre}}</td>
+                     <td>${{group.costo}}</td>
+                     <td>
+                        <button type="button" class="btn btn-warning btn-sm">editar</button>&nbsp;
+                        <button type="button" class="btn btn-danger btn-sm">eliminar</button>
+                     </td>
+                 </tr>
+              </tbody>
+            </table>
+          </div>
+          <!-- /.card-body -->
+          <div class="card-footer"></div>
+          <!-- /.card-footer-->
+      </div>
+  </div>
+  <!-- /.card -->
+</section>
+<!-- /.content -->
