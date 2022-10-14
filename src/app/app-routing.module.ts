@@ -16,6 +16,7 @@ import { EmpledadosComponent } from './pages/empledados/empledados.component';
 import { MovimientosComponent } from './pages/movimientos/movimientos.component';
 import { RolesComponent } from './pages/main-menu/roles/roles.component';
 import { TipoMovimientoComponent } from './pages/main-menu/tipo-movimiento/tipo-movimiento.component';
+import { ReporteComponent } from './pages/reporte/reporte.component';
 
 const routes: Routes = [
     {
@@ -25,8 +26,8 @@ const routes: Routes = [
         canActivateChild: [AuthGuard],
         children: [
             {
-                path: 'profile',
-                component: ProfileComponent
+                path: 'reporte',
+                component: ReporteComponent
             },
             {
                 path: 'empleados',
@@ -46,7 +47,7 @@ const routes: Routes = [
             },
             {
                 path: '',
-                component: DashboardComponent
+                component: ReporteComponent
             }
         ]
     },

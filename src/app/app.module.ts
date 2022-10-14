@@ -1,5 +1,5 @@
 import {BrowserModule} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
+import {LOCALE_ID, NgModule} from '@angular/core';
 import {HttpClientModule} from '@angular/common/http';
 
 import {AppRoutingModule} from '@/app-routing.module';
@@ -23,6 +23,7 @@ import { jqxGridModule } from "jqwidgets-ng/jqxgrid";
 import {DataTablesModule} from 'angular-datatables';
 
 
+
 import {registerLocaleData} from '@angular/common';
 import localeEn from '@angular/common/locales/en';
 import {UserComponent} from '@modules/main/header/user/user.component';
@@ -43,6 +44,7 @@ import { EmpledadosComponent } from './pages/empledados/empledados.component';
 import { MovimientosComponent } from './pages/movimientos/movimientos.component';
 import { RolesComponent } from './pages/main-menu/roles/roles.component';
 import { TipoMovimientoComponent } from './pages/main-menu/tipo-movimiento/tipo-movimiento.component';
+import { ReporteComponent } from './pages/reporte/reporte.component';
 
 defineCustomElements();
 registerLocaleData(localeEn, 'en-EN');
@@ -73,7 +75,8 @@ registerLocaleData(localeEn, 'en-EN');
         EmpledadosComponent,
         MovimientosComponent,
         RolesComponent,
-        TipoMovimientoComponent
+        TipoMovimientoComponent,
+        ReporteComponent
     ],
     imports: [
         BrowserModule,

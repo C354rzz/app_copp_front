@@ -9,6 +9,7 @@ export const environment = {
   API_ROL: 'api/Roles/',
   API_TMOV: 'api/TipoMovimientos/',
   API_EMP: 'api/Empleados/',
+  API_REP: 'api/RptEmpleadoMes/',
 };
 
 /*

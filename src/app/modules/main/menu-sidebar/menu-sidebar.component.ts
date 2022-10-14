@@ -33,9 +33,9 @@ export class MenuSidebarComponent implements OnInit {
 
 export const MENU = [
     {
-        name: 'Tablero',
+        name: 'Reporte',
         iconClasses: 'fas fa-tachometer-alt',
-        path: ['/']
+        path: ['/reporte']
     },
     {
         name: 'Movimientos',

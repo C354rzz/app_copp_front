@@ -1,3 +1,4 @@
+
 <!-- Content Header (Page header) -->
 <section class="content-header">
   <div class="container-fluid">
@@ -25,7 +26,8 @@
               <h3 class="card-title">Administrador de Movimientos</h3>
 
               <div class="card-tools">
-                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" title="Nuevo Movimiento" data-target="#mdlMovimiento">Nuevo Movimiento</button>
+                <button type="button" class="btn btn-primary btn-sm" title="Nuevo Movimiento" (click)="openModal(true)" >Nuevo Movimiento</button>
+                <!-- <button type="button" class="btn btn-info btn-lg" (click)="openModal()">click to open</button> -->
 
               </div>
           </div>
@@ -44,7 +46,7 @@
               </thead>
               <tbody>
                <tr *ngFor="let m of mov">
-                     <td>displayFormat: 'M/D/YYYY' {{m.fechaMov}}</td>
+                     <td>{{m.fechaMov | date: 'dd/MM/yyyy'}}</td>
                      <td>{{m.empleado.nombreEmp}} {{m.empleado.apellidoEmp}}</td>
                      <td>{{m.empleado.rol.nombreRol}}</td>
                      <td>{{m.tipoMovimiento.nombre}}</td>
@@ -64,12 +66,14 @@
 </section>
 <!-- /.content -->
 <!-- Modals -->
-<div class="modal fade" id="mdlMovimiento" tabindex="-1" role="dialog" aria-labelledby="mdlMovimientoTitle" aria-hidden="true">
+<div class="modal fade" id="mdlMovimiento" tabindex="-1" role="dialog"
+  [ngStyle]="{'display': modalMov ? 'block' : 'none', 'opacity': 1}"
+  aria-labelledby="mdlMovimientoTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="mdlMovimientoTitle">{{this.title}}</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button type="button" class="close" (click)="openModal(false)" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -116,6 +120,7 @@
             </div>
           </div>
           <button type="submit" class="btn btn-primary" (click)="saveMov()">Guardar</button>
+          <!-- <button type="button" id="btnClose" class="btn btn-danger" (click)="openModal(false)"><i class="fa fa-times fa-fw"></i> Cancel</button> -->
         </form>
       </div>
     </div>

@@ -1,17 +1,15 @@
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MovimientoService } from '../../services/movimiento.service';
 import { Movimientos } from '@/Models/movimientos.model';
 import { TMovimientoService } from '@services/tmovimiento.service';
 import { TipoMovimientos } from '../../Models/tipo-movimientos.model';
-import { ToastrModule } from 'ngx-toastr';
+import { ToastrService } from 'ngx-toastr';
 import { EmpleadosService } from '@services/empleados.service';
+import { DataTableDirective } from 'angular-datatables';
+import { Subject } from 'rxjs';
 
-interface Rol {
-  value: string;
-  viewValue: string;
-}
 enum Action{
   edit='edit',
   new='new'
@@ -22,7 +20,14 @@ enum Action{
   templateUrl: './movimientos.component.html',
   styleUrls: ['./movimientos.component.scss']
 })
-export class MovimientosComponent implements OnInit {
+export class MovimientosComponent implements OnInit, AfterViewInit, OnDestroy {
+
+  @ViewChild(DataTableDirective)
+  dtElement: DataTableDirective;
+  destroy$: Subject<any> = new Subject();
+  dtOptions: DataTables.Settings = {};
+  dtInstance:DataTables.Api;
+
 
   mov:any;
   tmov:any;
@@ -36,12 +41,16 @@ export class MovimientosComponent implements OnInit {
   actionToDo = Action.new;
   movimientioId? =0;
   tMovimientoId?=0;
+  modalMov : boolean = false;
 
   constructor(private http: HttpClient,
     private _formBuilder: FormBuilder,
     private movSvc: MovimientoService,
     private empSvc: EmpleadosService,
-    private tmovSvc: TMovimientoService,) {
+    private tmovSvc: TMovimientoService,
+    private toastr: ToastrService,
+
+    ) {
 
       this.formMov = this._formBuilder.group({
         empl: ['', Validators.required],
@@ -53,43 +62,63 @@ export class MovimientosComponent implements OnInit {
       });
 
 
-    this.http.get('https://localhost:7179/api/Movimientos').subscribe(mov => {
-
-      this.mov = mov;
-      setTimeout(()=>{
-        $('#movimientos').DataTable( {
-
-          pagingType: 'full_numbers',
-          pageLength: 5,
-          processing: true,
-          lengthMenu : [5, 10, 25],
-
-          columnDefs: [
-            {
-                "targets": [0],
-                "render": $.fn.dataTable.moment('DD/MM/YYYY')
-            }
-          ]
-        } );
-      }, 1);
-    }, error => console.error(error));
-
-    this.http.get('https://localhost:7179/api/TipoMovimientos').subscribe(tmov => {
-
+    this.tmovSvc.getAllTMov().subscribe((tmov=>{
       this.tmov = tmov;
+    }));
 
-    }, error => console.error(error));
-
-    this.http.get('https://localhost:7179/api/Empleados').subscribe(emp => {
-
+    this.empSvc.getAllEmp().subscribe((emp=>{
       this.emp = emp;
+    }));
 
-    }, error => console.error(error));
 
   }
 
 
   ngOnInit(): void {
+    this.movSvc.getAllMov().subscribe(mov => {
+      this.mov = mov;
+        setTimeout(()=>{
+          $('#movimientos').DataTable( {
+            pagingType: 'full_numbers',
+            pageLength: 5,
+            processing: true,
+            lengthMenu : [5, 10, 25]
+          } );
+        }, 1);
+      });
+
+  }
+
+  reloaddata() {
+    var datatable = $('#movimientos').DataTable();
+    this.movSvc.getAllMov().subscribe(mov => {
+        this.mov = mov;
+        datatable.destroy();
+        setTimeout(()=>{
+          $('#movimientos').DataTable( {
+            pagingType: 'full_numbers',
+            pageLength: 5,
+            processing: true,
+            lengthMenu : [5, 10, 25]
+          } );
+        }, 1);
+      });
+  }
+
+  ngOnDestroy(): void {
+    // this.dtTrigger.unsubscribe();
+    this.destroy$.next({});
+    this.destroy$.complete();
+  }
+
+
+  ngAfterViewInit(): void {
+    this.destroy$.next({});
+  }
+
+
+  openModal(open : boolean) : void {
+      this.modalMov = open;
   }
 
   changeTMov(idtmov: number){
@@ -163,10 +192,15 @@ export class MovimientosComponent implements OnInit {
 
     this.movSvc.newMov(movimiento).subscribe(data => {
       this.movimientioId = data.idMovimiento;
-      console.log('NuevoMov=>',data);
+      // console.log('NuevoMov=>',data);
+      this.toastr.success('Registro Guardado Correctamente','Movimiento Guardado');
       this.movSvc.listMovimientos();
+
       this.formMov.reset();
+      this.reloaddata()
+      this.openModal(false);
     });
+
 
   }
 
