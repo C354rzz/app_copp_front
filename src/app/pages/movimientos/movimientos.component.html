@@ -83,7 +83,7 @@
             <div class="form-group col-md-12">
               <label for="inputEmpleado4">Empleado</label>
               <select id="inputState" class="form-control" (ngModelChange)="changeEmp()" formControlName="empl">
-                <option selected>Selecciona..</option>
+
                 <option *ngFor="let e of emp" [value]="e.idEmpleado">
                   {{e.nombreEmp}} {{e.apellidoEmp}} -- {{e.rol.nombreRol}}
                 </option>
@@ -92,7 +92,7 @@
             <div class="form-group col-md-12">
               <label for="inputEmpleado4">Movimiento</label>
               <select id="inputState" class="form-control" (ngModelChange)="changeTMov($event)" formControlName="movi">
-                <option selected>Selecciona..</option>
+
                 <option *ngFor="let tm of tmov" [value]="tm.idTMovimiento">
                   {{tm.nombre}}
                 </option>
@@ -111,8 +111,8 @@
           </div>
           <div class="form-row">
             <div class="form-group col-md-6">
-              <label for="inputEmpleado4">Bono</label>
-              <input type="text" class="form-control" readonly id="Bono" formControlName="bono">
+              <!-- <label for="inputEmpleado4">Bono</label>
+              <input type="text" class="form-control" readonly id="Bono" formControlName="bono"> -->
             </div>
             <div class="form-group col-md-6">
               <label for="inputEmpleado4">Total</label>
@@ -120,7 +120,6 @@
             </div>
           </div>
           <button type="submit" class="btn btn-primary" (click)="saveMov()">Guardar</button>
-          <!-- <button type="button" id="btnClose" class="btn btn-danger" (click)="openModal(false)"><i class="fa fa-times fa-fw"></i> Cancel</button> -->
         </form>
       </div>
     </div>

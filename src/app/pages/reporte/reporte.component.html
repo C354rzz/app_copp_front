@@ -18,42 +18,42 @@
 <!-- Main content -->
 <section class="content">
   <div class="container-fluid">
-    <form [formGroup]="formRep" >
-      <div class="form-row">
-        <div class="form-group col-md-4">
-          <label for="inputEmpleado">Empleado</label>
-          <select id="inputState" class="form-control" formControlName="emp">
-            <option selected>Selecciona..</option>
-            <option *ngFor="let e of emp" [value]="e.idEmpleado">
-              {{e.nombreEmp}} {{e.apellidoEmp}}
-            </option>
-          </select>
-        </div>
-        <div class="form-group col-md-3">
-          <label for="inputMesL">Mes</label>
-          <select id="inputMes" class="form-control"  formControlName="mes">
-            <option selected>Selecciona..</option>
-            <option *ngFor="let m of meses" [value]="m.idMes">
-              {{m.nombreMes}}
-            </option>
-          </select>
-        </div>
-        <div class="form-group col-md-3">
-          <label for="inputYearL">Año</label>
-          <select id="anio" name="anio" class="form-control"  formControlName="anio">
-            <option selected>Selecciona..</option>
-            <option *ngFor="let a of anio" [value]="a.id">
-              {{a.nombre}}
-            </option>
-          </select>
-        </div>
-        <div class="form-group col-md-2">
-          <button type="submit" class="btn btn-primary center" (click)="FindDtsEmp()">Buscar</button>
-        </div>
-      </div>
-    </form>
+
     <div class="row">
       <div class="col-md-3">
+        <form [formGroup]="formRep" >
+          <div class="form-col">
+            <div class="form-group">
+              <label for="inputEmpleado">Empleado</label>
+              <select id="inputState" class="form-control" formControlName="emp">
+                <option *ngFor="let e of emp" [value]="e.idEmpleado">
+                  {{e.nombreEmp}} {{e.apellidoEmp}}
+                </option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="inputMesL">Mes</label>
+              <select id="inputMes" class="form-control"  formControlName="mes">
+                <option *ngFor="let m of meses" [value]="m.idMes">
+                  {{m.nombreMes}}
+                </option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="inputYearL">Año</label>
+              <select id="anio" name="anio" class="form-control"  formControlName="anio">
+                <option *ngFor="let a of anio" [value]="a.id">
+                  {{a.nombre}}
+                </option>
+              </select>
+            </div>
+            <div class="form-group col-md-2">
+              <button type="submit" class="btn btn-primary center" (click)="FindDtsEmp()">Buscar</button>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="col-md-4">
           <!-- Profile Image -->
           <div class="card card-primary card-outline">
               <div class="card-body box-profile">
@@ -69,34 +69,34 @@
                   </div>
 
                   <h3 class="profile-username text-center" >
-                    {{this.repEMp}}
+                    {{nombreEmp}}
                   </h3>
 
                   <p class="text-muted text-center" >
-                    Software Engineer
+                    {{puesto}}
                   </p>
 
                   <ul class="list-group list-group-unbordered mb-3">
                       <li class="list-group-item">
                           <b>Salario</b>
                           <a class="float-right" >
-                            1,402
+                            {{salario | currency:"$"}}
                           </a>
                       </li>
                       <li class="list-group-item">
                           <b>Entregas</b> <a class="float-right" >
-                            543
+                            {{comision | currency:"$"}}
                           </a>
                       </li>
                       <li class="list-group-item">
                           <b>Bono</b> <a class="float-right" >
-                            13,287
+                            {{bono | currency:"$"}}
                           </a>
                       </li>
                   </ul>
 
-                  <a href="#" class="btn btn-primary btn-block"
-                      ><b>Follow</b></a
+                  <a href="" class="btn btn-primary btn-block"
+                      ><b>Mas información</b></a
                   >
               </div>
               <!-- /.card-body -->
@@ -104,7 +104,7 @@
           <!-- /.card -->
       </div>
         <!-- /.col -->
-      <div class="col-md-9">
+      <div class="col-md-5">
           <div class="card">
               <div class="card-header p-2">
                   <ul class="nav nav-pills">
@@ -113,10 +113,10 @@
                               class="nav-link active"
                               href="#salario"
                               data-toggle="tab"
-                              >Salario</a
+                              >Detalles</a
                           >
                       </li>
-                      <li class="nav-item">
+                      <!-- <li class="nav-item">
                           <a
                               class="nav-link"
                               href="#entregas"
@@ -131,7 +131,7 @@
                               data-toggle="tab"
                               >Bonos</a
                           >
-                      </li>
+                      </li> -->
                   </ul>
               </div>
               <!-- /.card-header -->
@@ -140,69 +140,100 @@
                       <div class="active tab-pane" id="salario">
                           <!-- Post -->
                           <div class="post">
-                              <div class="user-block">
-                                  <pf-image
-                                      src="assets/img/default-profile.png"
-                                      alt="user image"
-                                      width="40"
-                                      height="40"
-                                      rounded
-                                  ></pf-image>
-                                  <span class="username">
-                                      <a href="#">Jonathan Burke Jr.</a>
-                                      <a
-                                          href="#"
-                                          class="float-right btn-tool"
-                                      >
-                                          <i class="fas fa-times"></i>
-                                      </a>
-                                  </span>
-                                  <span class="description">
-                                      Shared publicly - 7:40 PM today
-                                  </span>
+                            <div class="container">
+                            <div class="row align-items-start">
+                              <div class="col">
+                                <label class="strong">
+                                  Concepto
+                                </label>
                               </div>
-                              <!-- /.user-block -->
-                              <p>
-                                  Lorem ipsum represents a long-held
-                                  tradition for designers, typographers
-                                  and the like. Some people hate it and
-                                  argue for its demise, but others ignore
-                                  the hate as they create awesome tools to
-                                  help create filler text for everyone
-                                  from bacon lovers to Charlie Sheen fans.
-                              </p>
-
-                              <p>
-                                  <a
-                                      href="#"
-                                      class="link-black text-sm mr-2"
-                                      ><i class="fas fa-share mr-1"></i>
-                                      Share</a
-                                  >
-                                  <a href="#" class="link-black text-sm"
-                                      ><i
-                                          class="far fa-thumbs-up mr-1"
-                                      ></i>
-                                      Like</a
-                                  >
-                                  <span class="float-right">
-                                      <a
-                                          href="#"
-                                          class="link-black text-sm"
-                                      >
-                                          <i
-                                              class="far fa-comments mr-1"
-                                          ></i>
-                                          Comments (5)
-                                      </a>
-                                  </span>
-                              </p>
-
-                              <input
-                                  class="form-control form-control-sm"
-                                  type="text"
-                                  placeholder="Type a comment"
-                              />
+                              <div class="col">
+                                <label class="strong">
+                                  Cantidad
+                                </label>
+                              </div>
+                            </div>
+                              <div class="row align-items-start">
+                                <div class="col">
+                                  Horas
+                                </div>
+                                <div class="col">
+                                  {{horas}}
+                                </div>
+                              </div>
+                              <div class="row align-items-center">
+                                <div class="col">
+                                  Salario
+                                </div>
+                                <div class="col">
+                                  {{salario | currency:"$"}}
+                                </div>
+                              </div>
+                              <div class="row align-items-center">
+                                <div class="col">
+                                  Entregas
+                                </div>
+                                <div class="col">
+                                  {{entregas}}
+                                </div>
+                              </div>
+                              <div class="row align-items-end">
+                                <div class="col">
+                                  Comision
+                                </div>
+                                <div class="col">
+                                  {{comision | currency:"$"}}
+                                </div>
+                              </div>
+                              <div class="row align-items-end">
+                                <div class="col">
+                                  Bono
+                                </div>
+                                <div class="col">
+                                  {{bono | currency:"$"}}
+                                </div>
+                              </div>
+                              <div class="row align-items-end">
+                                <div class="col">
+                                  Vales Despensa
+                                </div>
+                                <div class="col">
+                                  {{valesDespensa | currency:"$"}}
+                                </div>
+                              </div>
+                              <div class="row align-items-end">
+                                <div class="col">
+                                  ISR
+                                </div>
+                                <div class="col">
+                                  {{isr}}%
+                                </div>
+                              </div>
+                              <div class="row align-items-end">
+                                <div class="col">
+                                  Costo ISR
+                                </div>
+                                <div class="col">
+                                  {{costoIsr | currency:"$"}}
+                                </div>
+                              </div>
+                              <div class="row align-items-end">
+                                <div class="col">
+                                  Subtotal
+                                </div>
+                                <div class="col">
+                                  {{subtotal | currency:  "$"}}
+                                </div>
+                              </div>
+                              <div class="row align-items-end">
+                                <div class="col">
+                                  Total Neto
+                                </div>
+                                <div class="col">
+                                  {{total | currency:  "$"}}
+                                </div>
+                              </div>
+                            </div>
                           </div>
                           <!-- /.post -->
 

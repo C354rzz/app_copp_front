@@ -24,8 +24,8 @@ export class EmpleadosService {
   getAllEmp(): Observable<Empleados[]>{
     return this.http
       .get<Empleados[]>(`${environment.API_URL}${environment.API_EMP}`)
-      .pipe(catchError(this.handlerError));
-      debugger;
+      .pipe(catchError(this.handlerError))
+
   }
 
   getEmpById(idEmpleados: number): Observable<Empleados>{

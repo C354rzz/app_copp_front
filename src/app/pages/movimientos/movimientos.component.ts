@@ -48,9 +48,7 @@ export class MovimientosComponent implements OnInit, AfterViewInit, OnDestroy {
     private movSvc: MovimientoService,
     private empSvc: EmpleadosService,
     private tmovSvc: TMovimientoService,
-    private toastr: ToastrService,
-
-    ) {
+    private toastr: ToastrService,) {
 
       this.formMov = this._formBuilder.group({
         empl: ['', Validators.required],

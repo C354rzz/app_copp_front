@@ -20,7 +20,8 @@ import {MessagesComponent} from '@modules/main/header/messages/messages.componen
 import {NotificationsComponent} from '@modules/main/header/notifications/notifications.component';
 
 import { jqxGridModule } from "jqwidgets-ng/jqxgrid";
-import {DataTablesModule} from 'angular-datatables';
+import { DataTablesModule} from 'angular-datatables';
+
 
 
 
@@ -45,9 +46,13 @@ import { MovimientosComponent } from './pages/movimientos/movimientos.component'
 import { RolesComponent } from './pages/main-menu/roles/roles.component';
 import { TipoMovimientoComponent } from './pages/main-menu/tipo-movimiento/tipo-movimiento.component';
 import { ReporteComponent } from './pages/reporte/reporte.component';
+import { SalarioxdiaComponent } from './pages/reporte/salarioxdia/salarioxdia.component';
+
 
 defineCustomElements();
 registerLocaleData(localeEn, 'en-EN');
+
+
 
 @NgModule({
     declarations: [
@@ -76,7 +81,8 @@ registerLocaleData(localeEn, 'en-EN');
         MovimientosComponent,
         RolesComponent,
         TipoMovimientoComponent,
-        ReporteComponent
+        ReporteComponent,
+        SalarioxdiaComponent
     ],
     imports: [
         BrowserModule,
@@ -94,7 +100,8 @@ registerLocaleData(localeEn, 'en-EN');
         jqxGridModule,
         DataTablesModule,
     ],
-    providers: [],
+    providers: [
+    ],
     bootstrap: [AppComponent]
 })
 export class AppModule {}

@@ -14,6 +14,17 @@ export class ReporteComponent implements OnInit {
 
 
   nombreEmp?='Nombre Empleado';
+  puesto?='Puesto Empleado';
+  horas?='0';
+  salario?=0;
+  entregas?='0';
+  comision?=0;
+  bono?=0;
+  subtotal?=0;
+  valesDespensa?='0';
+  isr?='0';
+  costoIsr?=0;
+  total?=0;
 
   anio: Anio[] = [
     {id: 2021, nombre: '2021'},
@@ -74,20 +85,22 @@ export class ReporteComponent implements OnInit {
     this.rptSrv.getRepByEmp(emp, mes, anio).subscribe(res=>{
 
       this.repEMp =res;
-      // type ObjectKey = keyof typeof repEMp;
-      // const nombre = 'r_fullName' as ObjectKey;
-      this.nombreEmp = res.r_fullName;
-      // console.log(this.repEMp.[nombre]);
+      this.nombreEmp = res[0].r_fullName;
+      this.puesto = res[0].r_rol;
+      this.horas = res[0].r_horas;
+      this.salario = res[0].r_salario;
+      this.entregas = res[0].r_entegas;
+      this.comision = res[0].r_comision;
+      this.bono = res[0].r_bono;
+      this.subtotal = this.salario + this.comision + this.bono;
+      this.valesDespensa = res[0].r_valesDespensa;
+      this.isr = res[0].r_isr;
+      this.costoIsr =this.salario * res[0].r_isr/100;
+      this.total = this.subtotal - this.costoIsr;
+
     })
 
 
   }
 
 }
-
-
-// formControlName="fullname"
-// formControlName="rol"
-// formControlName="salario"
-// formControlName="entregas"
-// formControlName="bono"

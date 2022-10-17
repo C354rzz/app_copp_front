@@ -17,6 +17,7 @@ import { MovimientosComponent } from './pages/movimientos/movimientos.component'
 import { RolesComponent } from './pages/main-menu/roles/roles.component';
 import { TipoMovimientoComponent } from './pages/main-menu/tipo-movimiento/tipo-movimiento.component';
 import { ReporteComponent } from './pages/reporte/reporte.component';
+import { SalarioxdiaComponent } from '@pages/reporte/salarioxdia/salarioxdia.component';
 
 const routes: Routes = [
     {
@@ -48,6 +49,10 @@ const routes: Routes = [
             {
                 path: '',
                 component: ReporteComponent
+            },
+            {
+                path: 'grafsalario',
+                component: SalarioxdiaComponent
             }
         ]
     },

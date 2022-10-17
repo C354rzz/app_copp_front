@@ -1,6 +1,6 @@
 export interface Empleados {
   IdEmpleado?: number,
-  nombre: string,
-  apellidos: string,
+  nombreEmp: string,
+  apellidoEmp: string,
   rolId: number
 }

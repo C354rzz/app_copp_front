@@ -25,7 +25,7 @@
               <h3 class="card-title">Administrador de Empleados</h3>
 
               <div class="card-tools">
-                <button type="button" class="btn btn-primary btn-sm">Nuevo Empleado</button>
+                <button type="button" class="btn btn-primary btn-sm" (click)="openModal(true, 0)" >Nuevo Empleado</button>
               </div>
           </div>
           <div class="card-body">
@@ -39,13 +39,13 @@
                 </tr>
               </thead>
               <tbody>
-               <tr *ngFor="let group of data">
+               <tr *ngFor="let group of emp">
                      <td>{{group.idEmpleado}}</td>
                      <td>{{group.nombreEmp}} {{group.apellidoEmp}}</td>
                      <td>{{group.rol.nombreRol}}</td>
                      <td>
-                        <button type="button" class="btn btn-warning btn-sm">editar</button>&nbsp;
-                        <button type="button" class="btn btn-danger btn-sm">eliminar</button>
+                        <button type="button" class="btn btn-warning btn-sm" (click)="openModal(true, this.group.idEmpleado)">editar</button>&nbsp;
+                        <button type="button" class="btn btn-danger btn-sm" (click)="delEmp(this.group.idEmpleado)">eliminar</button>
                      </td>
                  </tr>
               </tbody>
@@ -59,3 +59,51 @@
   <!-- /.card -->
 </section>
 <!-- /.content -->
+<!-- Modals -->
+<div class="modal fade" id="mdlEmpleado" tabindex="-1" role="dialog"
+  [ngStyle]="{'display': modalEmp ? 'block' : 'none', 'opacity': 1}"
+  aria-labelledby="mdlEmpleadoTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="mdlEmpleadoTitle">{{this.title}}</h5>
+        <button type="button" class="close" (click)="openModal(false, 0)" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="formEmp" >
+          <div class="form-row">
+            <div class="form-group col-md-12">
+              <label for="inputEmpleado4">Nombre</label>
+              <input type="text" class="form-control" id="nombreEmp"   formControlName="nombre">
+            </div>
+            <div class="form-group col-md-12">
+              <label for="inputEmpleado4">Apellido</label>
+              <input type="text" class="form-control" id="apellidoEmp"   formControlName="apellido">
+            </div>
+            <div class="form-group col-md-12">
+              <label for="inputRol">Rol</label>
+              <select id="inputState" class="form-control"  formControlName="rol">
+                <option *ngFor="let er of empRol" [value]="er.idRol">
+                  {{er.nombreRol}}
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+            </div>
+            <div class="form-group col-md-6">
+            </div>
+          </div>
+          <button id="btnaddEmp"  [hidden]="!isSaveShown"  type="submit" class="btn btn-primary" (click)="addEmpleado()">Guardar</button>
+          <button id="btnupdEmp"  [hidden]="!isUpdShown"  type="submit" class="btn btn-primary" (click)="updEmpleado()">Actualizar</button>
+          <!-- <button type="submit" class="btn btn-primary">Guardar</button> -->
+          <!-- <button type="button" id="btnClose" class="btn btn-danger" (click)="openModal(false)"><i class="fa fa-times fa-fw"></i> Cancel</button> -->
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /.modals -->
